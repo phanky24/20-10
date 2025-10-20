@@ -501,59 +501,7 @@
             title.style.animation = "fadeIn 3s ease-in forwards";
         });
 
-        // === Ảnh bay ngang ===
-        const imageContainer = document.createElement("div");
-        imageContainer.style.position = "fixed";
-        imageContainer.style.top = "0";
-        imageContainer.style.left = "0";
-        imageContainer.style.width = "100%";
-        imageContainer.style.height = "100%";
-        imageContainer.style.pointerEvents = "none";
-        imageContainer.style.zIndex = "500";
-        document.body.appendChild(imageContainer);
-
-        const imageSources = [
-        "./anh123.png","./anh1234.png"
-        ];
-
-        const slots = [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
-        let usedSlots = [];
-
-        function createFlyingImage() {
-            if (usedSlots.length === slots.length) usedSlots = [];
-            let slot;
-            do {
-                slot = slots[Math.floor(Math.random() * slots.length)];
-            } while (usedSlots.includes(slot));
-            usedSlots.push(slot);
-
-            const img = document.createElement("img");
-            img.src = imageSources[Math.floor(Math.random() * imageSources.length)];
-            img.style.position = "absolute";
-            img.style.left = "-10vw";
-            img.style.top = slot + "vh";
-            img.style.width = 5 + Math.random() * 5 + "vw";
-            img.style.opacity = 0.8 + Math.random() * 0.2;
-            img.style.pointerEvents = "auto";
-            imageContainer.appendChild(img);
-
-            const duration = 10000 + Math.random() * 4000;
-            img.animate(
-                [
-                    { transform: "translateX(0)", opacity: img.style.opacity },
-                    { transform: `translateX(110vw)`, opacity: 0.6 }
-                ],
-                { duration: duration, easing: "linear", fill: "forwards" }
-            );
-            setTimeout(() => img.remove(), duration);
-        }
-
-        // 🌸 Khi bấm vào ảnh → tạo một loạt hoa bay
-        function burstLanterns(count = 8) {
-            for (let i = 0; i < count; i++) {
-                setTimeout(createLantern, i * 150);
-            }
-        }
+        
 
         imageContainer.addEventListener("click", (e) => {
             if (e.target.tagName === "IMG") {
