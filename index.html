@@ -501,7 +501,26 @@
             title.style.animation = "fadeIn 3s ease-in forwards";
         });
 
-        
+        // === Ảnh bay ngang ===
+        const imageContainer = document.createElement("div");
+        imageContainer.style.position = "fixed";
+        imageContainer.style.top = "0";
+        imageContainer.style.left = "0";
+        imageContainer.style.width = "100%";
+        imageContainer.style.height = "100%";
+        imageContainer.style.pointerEvents = "none";
+        imageContainer.style.zIndex = "500";
+        document.body.appendChild(imageContainer);
+
+
+
+
+        // 🌸 Khi bấm vào ảnh → tạo một loạt hoa bay
+        function burstLanterns(count = 8) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(createLantern, i * 150);
+            }
+        }
 
         imageContainer.addEventListener("click", (e) => {
             if (e.target.tagName === "IMG") {
@@ -526,7 +545,6 @@
                     flap.style.animation = "openFlap 1s ease-out forwards";
                     card.style.animation = "paperRise 1s ease-out forwards 1s";
                     cardInner.style.animation = "textShow 0.5s ease forwards 1.5s";
-                    if (!imageInterval) imageInterval = setInterval(createFlyingImage, 650);
                     isOpen = true;
                 }
             }
